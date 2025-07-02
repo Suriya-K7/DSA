@@ -1,22 +1,39 @@
-let prices = [7, 1, 5, 3, 6, 4];
-
-// This function takes an array of stock prices and returns the maximum profit that can be made by buying and selling the stock
+/**
+ * **maxProfit Function**
+ *
+ * Calculates the **maximum profit** achievable from a single buy-sell transaction
+ * given an array of daily stock prices. The buy must occur before the sell.
+ *
+ * ### Logic:
+ * - Tracks the **minimum price** seen so far (`curMinProfit`).
+ * - At each iteration, computes potential **profit** if sold at the current price.
+ * - Updates the **maximum profit** (`curMaxProfit`) accordingly.
+ * - Time Complexity: O(n)
+ * - Space Complexity: O(1)
+ *
+ * ### Params:
+ * - `prices` (`number[]`) - An array where each element represents the stock price on a given day.
+ *
+ * ### Returns:
+ * - `number` - The **maximum profit** possible. Returns `0` if no profit can be made.
+ *
+ * ### Example:
+ * ```js
+ * maxProfit([7, 1, 5, 3, 6, 4]); // returns 5 (Buy at 1, Sell at 6)
+ * ```
+ *
+ * @author [Suriya](https://github.com/suriya-k7)
+ */
 function maxProfit(prices) {
-  // Initialize the current minimum profit to the first price in the array
   let curMinProfit = prices[0];
-  // Initialize the current maximum profit to 0
   let curMaxProfit = 0;
-  // Loop through the array of prices starting from the second element
   for (let i = 1; i < prices.length; i++) {
-    // Calculate the profit by subtracting the current minimum profit from the current price
     let profit = prices[i] - curMinProfit;
-    // Update the current minimum profit to the minimum of the current minimum profit and the current price
     curMinProfit = Math.min(curMinProfit, prices[i]);
-    // Update the current maximum profit to the maximum of the current maximum profit and the current profit
     curMaxProfit = Math.max(curMaxProfit, profit);
   }
-  // Return the current maximum profit
   return curMaxProfit;
 }
 
+let prices = [7, 1, 5, 3, 6, 4];
 console.log(maxProfit(prices));

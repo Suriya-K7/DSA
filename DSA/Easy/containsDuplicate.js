@@ -1,31 +1,73 @@
-let nums = [1, 2, 3, 1];
-
-// This function checks if an array contains any duplicate numbers
+/**
+ * **containsDuplicate Function**
+ *
+ * Checks whether the input array contains **any duplicate elements** using a `Set`.
+ *
+ * ### Logic:
+ * - Iterates through the array.
+ * - Uses a `Set` to track seen values.
+ * - If a value is already present in the `Set`, a duplicate is found.
+ * - Returns early for better performance on large inputs.
+ * - Time Complexity: O(n)
+ * - Space Complexity: O(n)
+ *
+ * ### Params:
+ * - `nums` (`number[]`) - The array of numbers to check for duplicates.
+ *
+ * ### Returns:
+ * - `boolean` - `true` if a duplicate exists, `false` otherwise.
+ *
+ * ### Example:
+ * ```js
+ * containsDuplicate([1, 2, 3, 1]); // returns true
+ * ```
+ *
+ * @author [Suriya](https://github.com/suriya-k7)
+ */
 function containsDuplicate(nums) {
-  // Create a new Set object to store the numbers
   let set = new Set();
 
-  // Loop through the array
   for (let i = 0; i < nums.length; i++) {
-    // If the Set already contains the current number, return true
     if (set.has(nums[i])) {
       return true;
     }
-    // Otherwise, add the current number to the Set
     set.add(nums[i]);
   }
-  // If the loop completes without finding any duplicates, return false
   return false;
 }
 
-//This function checks if an array contains duplicate values using a Set
+/**
+ * **containsDuplicateUsingSet Function**
+ *
+ * Alternative approach to check for duplicates by comparing the size of a `Set`
+ * created from the input array with the original array length.
+ *
+ * ### Logic:
+ * - Creates a `Set` from the array (automatically removes duplicates).
+ * - If the size of the set is less than the array length, duplicates exist.
+ * - Time Complexity: O(n)
+ * - Space Complexity: O(n)
+ *
+ * ### Params:
+ * - `nums` (`number[]`) - The array of numbers to check for duplicates.
+ *
+ * ### Returns:
+ * - `boolean` - `true` if a duplicate exists, `false` otherwise.
+ *
+ * ### Example:
+ * ```js
+ * containsDuplicateUsingSet([1, 2, 3, 1]); // returns true
+ * ```
+ *
+ * @author [Suriya](https://github.com/suriya-k7)
+ */
 function containsDuplicateUsingSet(nums) {
-  //Create a new Set from the array
   let set = new Set([...nums]);
 
-  //Return true if the size of the Set is not equal to the length of the array, meaning there are duplicate values
   return set.size !== nums.length;
 }
+
+let nums = [1, 2, 3, 1];
 
 console.log(containsDuplicate(nums));
 

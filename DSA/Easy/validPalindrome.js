@@ -1,55 +1,83 @@
-/*
-A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
-Given a string s, return true if it is a palindrome, or false otherwise.
-Example 1:
-Input: s = "A man, a plan, a canal: Panama"
-Output: true
-Explanation: "amanaplanacanalpanama" is a palindrome.
-*/
-let s = "A man, a plan, a canal: Panama";
-
-//This function checks if a string is a palindrome
+/**
+ * **isPalindrome Function**
+ *
+ * Determines if a given string is a **valid palindrome**, ignoring non-alphanumeric characters and case.
+ *
+ * ### Logic:
+ * - Calls `cleanUp()` to remove unwanted characters and convert to lowercase.
+ * - Calls `isPal()` to check if the cleaned string is a palindrome.
+ * - Time Complexity: O(n)
+ * - Space Complexity: O(n)
+ *
+ * ### Params:
+ * - `s` (`string`) - The input string to check.
+ *
+ * ### Returns:
+ * - `boolean` - `true` if the string is a valid palindrome, `false` otherwise.
+ *
+ * ### Example:
+ * ```js
+ * isPalindrome("A man, a plan, a canal: Panama"); // returns true
+ * isPalindrome("race a car");                    // returns false
+ * ```
+ *
+ * @author [Suriya](https://github.com/suriya-k7)
+ */
 function isPalindrome(s) {
-  //Call the isPal function and pass in the cleaned up string
   return isPal(cleanUp(s));
 }
 
-//This function takes a string as an argument and returns a new string with only lowercase letters and numbers
 function cleanUp(s) {
-  //Create a string of lowercase letters and numbers
   let char = "abcdefghijlkmnopqrstuvwxyz1234567890";
-  //Create an empty string to store the cleaned up string
   let str = "";
 
-  //Loop through each character in the string
   for (let i = 0; i < s.length; i++) {
     let letter = s[i].toLowerCase();
-    //Check if the character is in the string of lowercase letters and numbers
     if (char.includes(letter)) {
-      //If it is, add it to the cleaned up string
       str += letter;
     }
   }
   return str;
 }
 
-// This function checks if a string is a palindrome
+/**
+ * **isPal Function**
+ *
+ * Checks whether a cleaned string is a **palindrome** using the two-pointer technique.
+ *
+ * ### Logic:
+ * - Compares characters from both ends moving toward the center.
+ * - Returns `false` if any mismatch is found.
+ * - Time Complexity: O(n)
+ * - Space Complexity: O(1)
+ *
+ * ### Params:
+ * - `s` (`string`) - A cleaned, lowercase alphanumeric string.
+ *
+ * ### Returns:
+ * - `boolean` - `true` if the string is a palindrome, `false` otherwise.
+ *
+ * ### Example:
+ * ```js
+ * isPal("racecar"); // returns true
+ * isPal("hello");   // returns false
+ * ```
+ *
+ * @author [Suriya](https://github.com/suriya-k7)
+ */
 function isPal(s) {
-  // Initialize two pointers, one at the beginning and one at the end of the string
   let left = 0;
   let right = s.length - 1;
   while (right > left) {
-    // If the characters at the two pointers are equal, move the pointers towards the center
     if (s[left] === s[right]) {
       left++;
       right--;
     } else {
-      // If the characters at the two pointers are not equal, return false
       return false;
     }
   }
-  // If the loop completes without returning false, the string is a palindrome
   return true;
 }
 
+let s = "A man, a plan, a canal: Panama";
 console.log(isPalindrome(s));

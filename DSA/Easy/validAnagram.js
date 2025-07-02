@@ -1,55 +1,88 @@
-/*
-Given two strings s and t, return true if t is an anagram of s, and false otherwise.
-Example 1:
-Input: s = "anagram", t = "nagaram"
-Output: true
-Example 2:
-Input: s = "rat", t = "car"
-Output: false
-*/
-let s = "anagram";
-let t = "nagaram";
-// This function checks if two strings are anagrams of each other
+/**
+ * **isAnagram Function**
+ *
+ * Determines whether two strings `s` and `t` are **anagrams** of each other using character frequency mapping.
+ *
+ * ### Logic:
+ * - First, checks if the lengths of `s` and `t` are the same. If not, they can't be anagrams.
+ * - Builds a frequency map (`hashed`) for characters in `s`.
+ * - Iterates through `t` and decrements the frequency.
+ * - If any character in `t` doesn't match frequency in `hashed`, return `false`.
+ * - Returns `true` only if all character counts match.
+ * - Time Complexity: O(n)
+ * - Space Complexity: O(1) (bounded by character set)
+ *
+ * ### Params:
+ * - `s` (`string`) - First input string.
+ * - `t` (`string`) - Second input string.
+ *
+ * ### Returns:
+ * - `boolean` - `true` if `s` and `t` are anagrams, `false` otherwise.
+ *
+ * ### Example:
+ * ```js
+ * isAnagram("anagram", "nagaram"); // returns true
+ * isAnagram("rat", "car");         // returns false
+ * ```
+ *
+ * @author [Suriya](https://github.com/suriya-k7)
+ */
 function isAnagram(s, t) {
-  // If the lengths of the two strings are not equal, they cannot be anagrams
   if (s.length !== t.length) return false;
-  // Create a hash object to store the frequency of each character in the first string
   let hashed = s.split("").reduce((acc, cur) => {
-    // If the character is already in the hash object, increment its count
     if (cur in acc) {
       acc[cur]++;
-      // Otherwise, add the character to the hash object with a count of 1
     } else {
       acc[cur] = 1;
     }
-    // Return the updated hash object
     return acc;
   }, {});
 
-  // Iterate through the characters in the second string
   for (let i = 0; i < t.length; i++) {
-    // If the character is in the hash object, decrement its count
     if (hashed[t[i]]) {
       hashed[t[i]]--;
-      // Otherwise, the second string is not an anagram of the first string
     } else {
       return false;
     }
   }
-  // If all characters in the second string have been accounted for, the strings are anagrams
   return true;
 }
 
-//This function checks if two strings are anagrams of each other using a brute force method
+/**
+ * **isAnagramBruteForce Function**
+ *
+ * Checks if two strings `s` and `t` are **anagrams** using a **brute-force sort and compare** method.
+ *
+ * ### Logic:
+ * - First, compares the lengths of the strings.
+ * - Sorts both strings alphabetically.
+ * - Compares the sorted strings for equality.
+ * - Time Complexity: O(n log n) due to sorting
+ * - Space Complexity: O(n)
+ *
+ * ### Params:
+ * - `s` (`string`) - First input string.
+ * - `t` (`string`) - Second input string.
+ *
+ * ### Returns:
+ * - `boolean` - `true` if both strings are anagrams, `false` otherwise.
+ *
+ * ### Example:
+ * ```js
+ * isAnagramBruteForce("listen", "silent"); // returns true
+ * isAnagramBruteForce("hello", "world");   // returns false
+ * ```
+ *
+ * @author [Suriya](https://github.com/suriya-k7)
+ */
 function isAnagramBruteForce(s, t) {
-  //Check if the lengths of the two strings are equal
   if (s.length !== t.length) return false;
-  //Split the strings into arrays, sort the arrays, and join them back into strings
   let sortedS = s.split("").sort().join("");
   let sortedT = t.split("").sort().join("");
-  //Return true if the sorted strings are equal, otherwise return false
   return sortedS === sortedT;
 }
 
+let s = "anagram";
+let t = "nagaram";
 console.log(isAnagram(s, t));
 console.log(isAnagramBruteForce(s, t));

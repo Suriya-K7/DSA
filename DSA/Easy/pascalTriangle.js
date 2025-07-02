@@ -1,44 +1,66 @@
-let num = 10;
-// Function to generate Pascal's Triangle
+/**
+ * **pascalTriangle Function**
+ *
+ * Generates the **first `num` rows** of Pascal's Triangle.
+ *
+ * ### Logic:
+ * - Starts by manually pushing the first two base rows: `[1]` and `[1, 1]` (if applicable).
+ * - For each subsequent row:
+ *   - Computes the middle values by summing adjacent pairs from the previous row.
+ *   - Prepends and appends `1` to each row to maintain triangle structure.
+ * - Time Complexity: O(num²) — each row has up to `num` elements.
+ * - Space Complexity: O(num²) — entire triangle stored.
+ *
+ * ### Params:
+ * - `num` (`number`) - The number of rows of Pascal’s Triangle to generate.
+ *
+ * ### Returns:
+ * - `number[][]` - A 2D array representing the triangle.
+ *
+ * ### Example:
+ * ```js
+ * pascalTriangle(5);
+ * // Output:
+ * // [
+ * //   [1],
+ * //   [1, 1],
+ * //   [1, 2, 1],
+ * //   [1, 3, 3, 1],
+ * //   [1, 4, 6, 4, 1]
+ * // ]
+ * ```
+ *
+ * @author [Suriya](https://github.com/suriya-k7)
+ */
 function pascalTriangle(num) {
-  // Initialize an empty array to store the output
   let output = [];
 
-  // If the input number is greater than or equal to 1, push the first row of Pascal's Triangle to the output array
   if (num >= 1) output.push([1]);
-  // If the input number is greater than or equal to 2, push the second row of Pascal's Triangle to the output array
   if (num >= 2) output.push([1, 1]);
 
-  // Loop through the remaining rows of Pascal's Triangle
   for (let i = 2; i < num; i++) {
-    // Initialize the first and last elements of the row
     let first = (last = 1);
-    // Get the previous row of Pascal's Triangle
     let prevArr = output[i - 1];
 
-    // If the previous row has only two elements, push the current row to the output array
     if (prevArr.length === 2) {
       output.push([first, first + last, last]);
     } else {
-      // Initialize variables to keep track of the left and right elements of the previous row
       let left = 0;
       let right = 1;
-      // Initialize an empty array to store the current row
       let arrToAdd = [];
 
-      // Loop through the previous row and calculate the sum of the left and right elements
       while (right < prevArr.length) {
         arrToAdd.push(prevArr[left] + prevArr[right]);
         left++;
         right++;
       }
-      // Push the current row to the output array
       output.push([first, ...arrToAdd, last]);
     }
   }
 
-  // Return the output array
   return output;
 }
+
+let num = 10;
 
 console.log(pascalTriangle(num));
